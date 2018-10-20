@@ -1,0 +1,14 @@
+
+\.settings/org\.eclipse\.core\.resources\.prefs
+\bin
+
+\.actionScriptProperties
+
+\.flexProperties
+
+\.project
+
+Copyofbuild\.bat
+
+\html-template
+*.swf
