@@ -59,34 +59,34 @@
 		<s:DataGrid id="pinaraUserList" width="490" height="330" selectionChange="selectionChangeHandlerPinara(event)" dataProvider="{userListXmlCollection}" > 
 			<s:columns>
 				<s:ArrayList>
-				<!--s:GridColumn dataField="id" headerText="{resourceManager.getString('messages', 'uculUserId')}" width="{this.pinaraUserList.width * 0.2}">
-				<s:itemRenderer>
-				<fx:Component>
-				<s:DefaultGridItemRenderer textAlign="left" />
-				</fx:Component>
-				</s:itemRenderer>
-				</s:GridColumn>
-				<s:GridColumn dataField="statuinfo" headerText="{resourceManager.getString('messages', 'uculStatu')}" width="{this.pinaraUserList.width * 0.2}">
-				<s:itemRenderer>
-				<fx:Component>
-				<s:DefaultGridItemRenderer textAlign="left" />
-				</fx:Component>
-				</s:itemRenderer>
-				</s:GridColumn>
-				<s:GridColumn dataField="username" headerText="{resourceManager.getString('messages', 'uculUserName')}" width="{this.pinaraUserList.width * 0.25}">
-				<s:itemRenderer>
-				<fx:Component>
-				<s:DefaultGridItemRenderer textAlign="left" />
-				</fx:Component>
-				</s:itemRenderer>
-				</s:GridColumn>
-				<s:GridColumn dataField="roleinfo" headerText="{resourceManager.getString('messages', 'uculRoleInfo')}" width="{this.pinaraUserList.width * 0.29}">
-				<s:itemRenderer>
-				<fx:Component>
-				<s:DefaultGridItemRenderer textAlign="left" />
-				</fx:Component>
-				</s:itemRenderer>
-				</s:GridColumn-->
+					<s:GridColumn dataField="id" headerText="{resourceManager.getString('messages', 'uculUserId')}" width="{this.pinaraUserList.width * 0.2}">
+						<s:itemRenderer>
+							<!--<fx:Component>
+								<s:DefaultGridItemRenderer textAlign="left" />
+							</fx:Component>-->
+						</s:itemRenderer>
+					</s:GridColumn>
+					<s:GridColumn dataField="statuinfo" headerText="{resourceManager.getString('messages', 'uculStatu')}" width="{this.pinaraUserList.width * 0.2}">
+						<s:itemRenderer>
+							<!--<fx:Component>
+								<s:DefaultGridItemRenderer textAlign="left" />
+							</fx:Component>-->
+						</s:itemRenderer>
+					</s:GridColumn>
+					<s:GridColumn dataField="username" headerText="{resourceManager.getString('messages', 'uculUserName')}" width="{this.pinaraUserList.width * 0.25}">
+						<s:itemRenderer>
+							<!--<fx:Component>
+								<s:DefaultGridItemRenderer textAlign="left" />
+							</fx:Component>-->
+						</s:itemRenderer>
+					</s:GridColumn>
+					<s:GridColumn dataField="roleinfo" headerText="{resourceManager.getString('messages', 'uculRoleInfo')}" width="{this.pinaraUserList.width * 0.29}">
+						<s:itemRenderer>
+							<!--<fx:Component>
+								<s:DefaultGridItemRenderer textAlign="left" />
+							</fx:Component>-->
+						</s:itemRenderer>
+					</s:GridColumn>
 				</s:ArrayList>
 			</s:columns>
 		</s:DataGrid>
