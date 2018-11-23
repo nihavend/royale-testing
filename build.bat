@@ -15,7 +15,7 @@ set COMPILER_PATH=%ROYALE_PATH%\royale-asjs\js\bin
 set PRJHOME=D:\dev\royale-emulation-works\github\royale-testing
 set SRCPATH=%PRJHOME%\src\*
 REM set MAINCLASS=%PRJHOME%\src\main\Main.mxml
-set MAINCLASS=%PRJHOME%\src\main\Header.mxml
+set MAINCLASS=%PRJHOME%\src\main\ParserBug.mxml
 
 
 set GITREPO=D:\dev\royale-emulation-works\github\royale-asjs\frameworks\projects
