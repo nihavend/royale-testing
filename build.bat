@@ -10,19 +10,23 @@ rem %COMPILER_PATH%\mxmlc %MAINCLASS% -compiler.namespaces.namespace %COMPILER_N
 rem set MAINCLASS=%PRJHOME%\src\main\PinaraUI.mxml
 
 
-set ROYALE_PATH=D:\dev\royale-emulation-works\apache-royale-0.9.5-bin-js-swf
+set ROYALE_PATH=D:\dev\royale-emulation-works\apache-royale-0.9.6-bin-js-swf
 set COMPILER_PATH=%ROYALE_PATH%\royale-asjs\js\bin
+
+REM set COMPILER_PATH=D:\dev\royale-emulation-works\github\royale-asjs\js\bin
+
 set PRJHOME=D:\dev\royale-emulation-works\github\royale-testing
 set SRCPATH=%PRJHOME%\src\*
 REM set MAINCLASS=%PRJHOME%\src\main\Main.mxml
-set MAINCLASS=%PRJHOME%\src\main\ParserBug.mxml
+REM set MAINCLASS=%PRJHOME%\src\main\ParserBug.mxml
+set MAINCLASS=%PRJHOME%\src\main\LogAnalysisForm.mxml
 
 
 set GITREPO=D:\dev\royale-emulation-works\github\royale-asjs\frameworks\projects
-set MX_SWC=%GITREPO%\MXRoyale\target\MXRoyale-0.9.5-SNAPSHOT-swf.swc
-set MX_JS=%GITREPO%\MXRoyale\target\MXRoyale-0.9.5-SNAPSHOT-js.swc
-set SPARK_SWC=%GITREPO%\SparkRoyale\target\SparkRoyale-0.9.5-SNAPSHOT-swf.swc
-set SPARK_JS=%GITREPO%\SparkRoyale\target\SparkRoyale-0.9.5-SNAPSHOT-js.swc
+set MX_SWC=%GITREPO%\MXRoyale\target\MXRoyale-0.9.6-SNAPSHOT-swf.swc
+set MX_JS=%GITREPO%\MXRoyale\target\MXRoyale-0.9.6-SNAPSHOT-js.swc
+set SPARK_SWC=%GITREPO%\SparkRoyale\target\SparkRoyale-0.9.6-SNAPSHOT-swf.swc
+set SPARK_JS=%GITREPO%\SparkRoyale\target\SparkRoyale-0.9.6-SNAPSHOT-js.swc
 
 set SPARK_MF=%GITREPO%\SparkRoyale\src\main\resources\spark-royale-manifest.xml
 set MX_MF=%GITREPO%\MXRoyale\src\main\resources\mx-royale-manifest.xml
