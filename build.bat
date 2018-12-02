@@ -1,28 +1,17 @@
 @echo off
-rem set MX_SWC=%ROYALE_PATH%\royale-asjs\frameworks\projects\MXRoyale\target\MXRoyale-0.9.5-SNAPSHOT-swf.swc
-rem set MX_JS=%ROYALE_PATH%\royale-asjs\frameworks\projects\MXRoyale\target\MXRoyale-0.9.5-SNAPSHOT-js.swc
-REM set EXTLIBS=D:\dev\royale-emulation-works\github\fiber-lib\fiber-lib.swc
-REM set EXTLIBS=D:\dev\royale-emulation-works\github\module-testing\module-testing-lib.swc
-rem .\libs\as3corelib.swc,.\libs\fiber-lib.swc,.\libs\serializers-lib.swc,.\libs\flexlib.swc,.\libs\libravis.swc
-rem set SPARK_SWC=%ROYALE_PATH%\royale-asjs\frameworks\projects\SparkRoyale\target\SparkRoyale-0.9.5-SNAPSHOT-swf.swc
-rem set SPARK_JS=%ROYALE_PATH%\royale-asjs\frameworks\projects\SparkRoyale\target\SparkRoyale-0.9.5-SNAPSHOT-js.swc
-rem %COMPILER_PATH%\mxmlc %MAINCLASS% -compiler.namespaces.namespace %COMPILER_NS% -external-library-path+=%MX_SWC%,%SPARK_SWC% -js-external-library-path+=%MX_JS%,%SPARK_JS% -source-path=%SRCPATH% -locale+=tr_TR
-rem set MAINCLASS=%PRJHOME%\src\main\PinaraUI.mxml
-
 
 set ROYALE_PATH=D:\dev\royale-emulation-works\apache-royale-0.9.6-bin-js-swf
 set COMPILER_PATH=%ROYALE_PATH%\royale-asjs\js\bin
-
 REM set COMPILER_PATH=D:\dev\royale-emulation-works\github\royale-asjs\js\bin
 
-set PRJHOME=D:\dev\royale-emulation-works\github\royale-testing
+set PRJHOME=.
 set SRCPATH=%PRJHOME%\src\*
 REM set MAINCLASS=%PRJHOME%\src\main\Main.mxml
 REM set MAINCLASS=%PRJHOME%\src\main\ParserBug.mxml
 set MAINCLASS=%PRJHOME%\src\main\LogAnalysisForm.mxml
 
 
-set GITREPO=D:\dev\royale-emulation-works\github\royale-asjs\frameworks\projects
+set GITREPO=..\royale-asjs\frameworks\projects
 set MX_SWC=%GITREPO%\MXRoyale\target\MXRoyale-0.9.6-SNAPSHOT-swf.swc
 set MX_JS=%GITREPO%\MXRoyale\target\MXRoyale-0.9.6-SNAPSHOT-js.swc
 set SPARK_SWC=%GITREPO%\SparkRoyale\target\SparkRoyale-0.9.6-SNAPSHOT-swf.swc
