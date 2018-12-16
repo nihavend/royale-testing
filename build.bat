@@ -5,10 +5,8 @@ set COMPILER_PATH=%ROYALE_PATH%\royale-asjs\js\bin
 REM set COMPILER_PATH=D:\dev\royale-emulation-works\github\royale-asjs\js\bin
 
 set PRJHOME=.
-set SRCPATH=%PRJHOME%\src\*
-REM set MAINCLASS=%PRJHOME%\src\main\Main.mxml
-REM set MAINCLASS=%PRJHOME%\src\main\ParserBug.mxml
-set MAINCLASS=%PRJHOME%\src\main\LogAnalysisForm.mxml
+set SRCPATH=%PRJHOME%\src\*,.\locale\{locale}
+set MAINCLASS=%PRJHOME%\src\main\FindBug.mxml
 
 
 set GITREPO=..\royale-asjs\frameworks\projects
@@ -27,5 +25,7 @@ set COMPILER_NS=library://ns.apache.org/royale/mx %MX_MF% library://ns.apache.or
 
 
 @echo on
+rmdir /s src\main\bin
+
 set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8 -Duser.country=EN -Duser.language=en
 %COMPILER_PATH%\mxmlc %MAINCLASS% -compiler.namespaces.namespace %COMPILER_NS% -library-path+=%MX_SWC%,%SPARK_SWC%,%EXTLIBS% -js-library-path+=%MX_JS%,%SPARK_JS%,%EXTLIBS% -source-path=%SRCPATH% -locale+=tr_TR
