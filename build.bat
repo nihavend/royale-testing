@@ -5,7 +5,8 @@ set COMPILER_PATH=%ROYALE_PATH%\royale-asjs\js\bin
 REM set COMPILER_PATH=D:\dev\royale-emulation-works\github\royale-asjs\js\bin
 
 set PRJHOME=.
-set SRCPATH=%PRJHOME%\src\*,.\locale\{locale}
+rem set SRCPATH=%PRJHOME%\src\*,.\locale\{locale}\*
+set SRCPATH=%PRJHOME%\src\*,.\locale\en_US\*,.\locale\tr_TR\*
 set MAINCLASS=%PRJHOME%\src\main\FindBug.mxml
 
 

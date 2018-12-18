@@ -14,3 +14,5 @@ Copyofbuild\.bat
 *.swf
 
 eski/
+
+bin-debug/
