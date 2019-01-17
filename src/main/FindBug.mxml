@@ -2,27 +2,198 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 		 xmlns:s="library://ns.apache.org/royale/spark"
 		 xmlns:mx="library://ns.apache.org/royale/mx"
-		 xmlns:comps="com.likya.pinara.comps.*"
-		 width="100%">
+		 currentState="loggedOutState" 
+		 creationComplete="application_creationCompleteHandler()"
+		 height="100%"
+		 width="100%"
+		 xmlns:userops="com.likya.pinara.services.userops.*">
 
 	<fx:Metadata>
 		[ResourceBundle("messages")]
 	</fx:Metadata>
 	
+	<s:states>
+		<s:State name="loggedOutState"/>
+	</s:states>
+	
 	<fx:Script>
 		<![CDATA[
+			
+			import org.apache.royale.net.URLLoader;
+			import org.apache.royale.net.URLRequest;
+			import org.apache.royale.net.HTTPConstants;
+			import org.apache.royale.net.URLRequestHeader;
+			
+			import mx.controls.Alert;
+			import mx.utils.Base64Encoder;
+			import mx.messaging.channels.URLVariables;
+			
+			import mx.rpc.events.FaultEvent;
+			import mx.events.IOErrorEvent;
+			import mx.events.SecurityErrorEvent;
+			import mx.events.HTTPStatusEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import com.likya.pinara.model.User;
+			import com.likya.pinara.model.ModelLocator;
+			import com.likya.pinara.event.ResourceEvent;
+			import com.likya.pinara.utils.BasicAuthenticationHandler;
+			
+			[Bindable]
+			private var trIcon:Class;
+			[Bindable]
+			private var enIcon:Class;
+			
+			protected function application_creationCompleteHandler():void {
+				addEventListener(ResourceEvent.LOGIN, checkLogin);
+			}
+			
+			private function securityError(event:SecurityErrorEvent):void {
+				Alert.show(resourceManager.getString("messages", "pinaraSecurityError") + event.toString());
+			}
+			
+			private function ioErrorHandler(event:IOErrorEvent):void {
+				Alert.show(event.toString());
+			}
+			
+			private function checkLogin(event:ResourceEvent):void {
+				doWork(User(event.object), false);
+			}
+			
+			private function doWork(userInfo:User, islogout:Boolean):void {
+				
+				try {
+					
+					ModelLocator.getInstance().currentUser = userInfo;
+					
+					var req:URLRequest = new URLRequest("/PInara/restsrvc/authanticate/");
+					req.method = HTTPConstants.POST;
+					
+					var encoder:Base64Encoder = new Base64Encoder();        
+					
+					encoder.encode("expdate:31122099");
+					var str:String = "name=John+Doe" + "[" + encoder.toString() + "]";
+					
+					req.data = new URLVariables(str);
+					
+					encoder.encodeUTFBytes(userInfo.username + ":" + userInfo.password);
+					var credsHeader:URLRequestHeader = new URLRequestHeader("Authorization", "Basic " + encoder.toString());
+					req.requestHeaders.push(credsHeader);
+					
+					var loader:URLLoader = new URLLoader();
+					loader.addEventListener(Event.COMPLETE, getLoginDataResultHandler);
+					loader.addEventListener(Event.COMPLETE, getAppDataHandler); 
+					loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
+					loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+					
+					loader.load(req);
+					
+				} catch (e:Error){
+					Alert.show("doWork : " + e.message);
+				} 
+			}
+			
+			private function getLoginDataResultHandler(event:Event):void {
+				
+				// Alert.show("event.result : " + event.toString());
+				var recoverParameter:String = XML(event.target.data).result;
+				
+				var packedResponse:XML;
+				// packedResponse = XML("<userInfo><id>" + currentDataItem.id + "</id><username>"  + currentDataItem.text + "</username><roleinfo>" + currentDataItem.roleinfo + "</roleinfo><statuinfo>" + currentDataItem.statusinfo + "</statuinfo></userInfo>");
+				packedResponse = XML("username=" + ModelLocator.getInstance().currentUser.username); 
+				BasicAuthenticationHandler.authAndCall(userOpsService, "userread", packedResponse);
+				
+			}
+			
+			private function getAppDataHandler(event:Event):void {
+				/*
+				var url:String = "/logview" + "?" + "infotag=appInfo";
+				appDataService.url = url;
+				appDataService.method = "POST";
+				BasicAuthenticationHandler.authAndSend(appDataService);
+				*/
+			}
+			
+			private function changeLocale(locale:String):void {
+			}
+			
+			protected function button_clickHandler(event:MouseEvent):void {
+
+				var userInfo:User = new User();
+				
+				userInfo.username = "pinara";//RO:userName.text;
+				userInfo.password = "pinara";//RO:password.text;
+				
+				dispatchEvent(new ResourceEvent(ResourceEvent.LOGIN, userInfo as Object));
+					
+			}
+			
+			private function faultHandler(event:FaultEvent):void {
+				//Alert.show("Check if your database is running !");
+				Alert.show(resourceManager.getString("messages", "loginFormDBError"));
+			}
+			
+			protected function userOpsService_resultHandler(event:ResultEvent):void
+			{
+				var userXML:XML;
+				
+				try {
+					userXML = XML(event.message.body);
+				} catch(err:Error) {
+					Alert.show("Result : " + err.message);
+				}
+				
+				ModelLocator.getInstance().currentUser.username = userXML.username;
+				ModelLocator.getInstance().currentUser.roleinfo = userXML.roleinfo;
+				ModelLocator.getInstance().currentUser.statuinfo = userXML.statuinfo;
+				
+			}
+			
+			protected function userOpsService_faultHandler(event:FaultEvent):void
+			{
+				BasicAuthenticationHandler.service_faultHandler(event);				
+			}
 		]]>
 	</fx:Script>
 	
 	<fx:Declarations>
-		
-	</fx:Declarations>
+		<userops:UserOps id="userOpsService" result="userOpsService_resultHandler(event)" fault="userOpsService_faultHandler(event)" />
+	</fx:Declarations>	
 	
 	<s:layout>
 		<s:VerticalLayout gap="10" paddingRight="10" paddingLeft="10" paddingTop="10" paddingBottom="20" />
 	</s:layout>
 	
-	<s:Button id="button" width="100" label="{resourceManager.getString('messages', 'userName')}" />
-	<s:Button id="button2" width="100" label="Password :" />
+	<s:Group width="320" height="170" id="withoutstate">
+		<s:Panel
+			horizontalCenter="0"
+			verticalCenter="0"
+			id="loginPanel1" 
+			width="100%" 
+			height="100%" 
+			chromeColor="#E2E5E7"
+			title="{resourceManager.getString('messages', 'loginTitle')} : withoutstate " 
+			>
+			
+			<mx:Button y="-27" right="30" width="20" click="changeLocale('tr_TR')" icon="{trIcon}" toolTip="Türkçe"/>
+			<mx:Button y="-27" right="5" width="20" click="changeLocale('en_US')" icon="{enIcon}" toolTip="English"/>
+			
+			<mx:Form width="100%" height="100%"><!-- defaultButton="{button}" -->
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'userName')}"> 
+					<s:TextInput id="userName1" width="200"/>
+				</mx:FormItem>
+				
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'password')}">
+					<s:TextInput id="password1" displayAsPassword="true" width="200"/>
+				</mx:FormItem>
+				
+				<mx:FormItem paddingLeft="63" paddingTop="10">
+					<s:Button id="button1" width="64" height="30" label="{resourceManager.getString('messages', 'login')}" click="button_clickHandler(event)"/>
+				</mx:FormItem>
+			</mx:Form>		
+		</s:Panel>
+	</s:Group>
 	
 </s:Application>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 	   xmlns:s="library://ns.apache.org/royale/spark" 
+		 	   xmlns:mx="library://ns.apache.org/royale/mx"
+			   title="{resourceManager.getString('messages', 'mailConfigurationwWindowTitle')}"
+		       width="100%" height="100%"
+			   close="removeMe();"
+			   xmlns:jobmanager="com.likya.pinara.services.jobmanager.*" xmlns:utils="com.likya.pinara.utils.*" >
+	
+	<s:states>
+		<s:State name="defined"/>
+		<s:State name="undefined"/>
+	</s:states>
+	
+	<!--fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace local "*";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		
+		.toggleSwitch
+		{
+			skinClass:ClassReference("com.likya.pinara.skins.ToggleSwitchSkin");
+		}
+	</fx:Style-->
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.likya.pinara.utils.BasicAuthenticationHandler;
+			import com.likya.pinara.utils.ConfigurationsUtil;
+			import com.likya.pinara.utils.JobXmlToView;
+			import com.likya.pinara.utils.SSS;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.events.GridSelectionEvent;
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			public var mailStateInfoArray:ArrayList;
+			
+			[Bindable]
+			public var mailInfoArray:ArrayList;
+			
+			[Bindable]
+			public var mailPropArray:ArrayList;
+			
+			[Bindable]
+			public var mailInfoXml:XML;
+			
+			private function removeMe():void {
+				PopUpManager.removePopUp(this);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+	</fx:Declarations>
+	
+	
+</s:TitleWindow>

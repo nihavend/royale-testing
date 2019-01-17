@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.apache.org/royale/spark"
+		 xmlns:mx="library://ns.apache.org/royale/mx"
+		 width="100%" creationComplete="onCreationComplete()">
+	
+	<fx:Script>
+		<![CDATA[
+			// import com.likya.pinara.event.ResourceEvent;
+			// import com.likya.pinara.model.AppInfo;
+			// import com.likya.pinara.model.User;
+			
+			import mx.formatters.DateFormatter;
+
+			//[Bindable] 
+			// public var userInfo:User = null;
+			
+			// [Bindable] 
+			// public var appInfo:AppInfo = null;
+
+			import org.apache.royale.utils.Timer;
+			[Bindable] 
+			private var time:String; 
+			private var ticker:Timer;
+			
+			[Bindable]
+			// [Embed(source="/images/logout.png")] 
+			private var logoutIcon:Class;
+			
+			[Bindable]
+			// [Embed(source="/images/tr_icon.png")] 
+			private var trIcon:Class;
+			
+			[Bindable]
+			// [Embed(source="/images/en_icon.png")] 
+			private var enIcon:Class;
+			
+			public function showTime():void {
+				var currentTime:Date = new Date();
+				var timeFormat:DateFormatter = new DateFormatter();
+				timeFormat.formatString = "DD/MM/YYYY JJ:NN:SS"
+				time = timeFormat.format(currentTime);
+				ticker = new Timer(1,1);
+				/**
+				 * Replace flash.utils.Timer with org.apache.royale.utils.Timer.
+				 * Replace TimerEvent with org.apache.royale.events.Event
+				 * Replace TimerEvent.TIMEr with org.apache.royale.utils.Timer.TIMER
+				*/
+				// ticker.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+				ticker.addEventListener(Timer.TIMER, onTimerComplete);
+				ticker.start();
+			}
+			
+			public function onCreationComplete():void {
+				showTime();
+			}
+			
+			public function onTimerComplete(event:Timer):void {
+				showTime();
+			} 
+			
+			private function logout():void {
+				// dispatchEvent(new ResourceEvent(ResourceEvent.LOGOUT));
+			}
+			
+			private function changeLocale(locale:String):void {
+				// dispatchEvent(new ResourceEvent(ResourceEvent.CHANGE_LOCALE, locale));
+			}
+			
+			/*RO: protected function headerPanel_addedToStageHandler(event:Event):void
+			{
+				userInfo = ModelLocator.getInstance().currentUser;
+			}*/
+			
+			override public function addedToParent():void
+			{
+				super.addedToParent();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+	</fx:Declarations>
+	
+	<s:Label x="95" y="-24" fontSize="18" fontWeight="normal" text="{'- ' + resourceManager.getString('messages', 'applicationName')}"/>
+	
+	<!--s:Panel id="headerPanel" width="100%" height="20" chromeColor="#E1E5EA" >
+		<s:Label x="95" y="-24" fontSize="18" fontWeight="normal" text="{'- ' + resourceManager.getString('messages', 'applicationName')}"/-->
+		
+		<!--s:Label y="-18" right="90" fontWeight="bold" text="{time}"/-->
+		
+		<!--mx:Button y="-27" right="56" width="20" click="logout()" icon="{logoutIcon}" toolTip="{resourceManager.getString('messages', 'logout')}"/>
+		<mx:Button y="-27" right="30" width="20" click="changeLocale('tr_TR')" icon="{trIcon}" toolTip="Türkçe"/>
+		<mx:Button y="-27" right="5" width="20" click="changeLocale('en_US')" icon="{enIcon}" toolTip="English"/-->
+		
+	<!--/s:Panel--> 
+	
+</s:Group>

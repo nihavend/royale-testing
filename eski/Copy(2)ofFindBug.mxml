@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+		 xmlns:s="library://ns.apache.org/royale/spark"
+		 xmlns:mx="library://ns.apache.org/royale/mx"
+		 currentState="loggedOutState" 
+		 height="100%"
+		 width="100%">
+
+	<fx:Metadata>
+		[ResourceBundle("messages")]
+	</fx:Metadata>
+	
+	<s:states>
+		<s:State name="loggedOutState"/>
+	</s:states>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			private var trIcon:Class;
+			[Bindable]
+			private var enIcon:Class;
+			
+			private function changeLocale(locale:String):void {
+			}
+			
+			protected function button_clickHandler(event:MouseEvent):void {
+			}
+			
+			private function faultHandler(event:FaultEvent):void {
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+	</fx:Declarations>	
+	
+	<s:layout>
+		<s:VerticalLayout gap="10" paddingRight="10" paddingLeft="10" paddingTop="10" paddingBottom="20" />
+	</s:layout>
+
+	<s:Group width="320" height="170" includeIn="loggedOutState">
+		<s:Panel
+			horizontalCenter="0"
+			verticalCenter="0"
+			id="loginPanel" 
+			width="100%" 
+			height="100%" 
+			chromeColor="#E2E5E7"
+			title="{resourceManager.getString('messages', 'loginTitle')}" 
+			>
+			
+			<mx:Button y="-27" right="30" width="20" click="changeLocale('tr_TR')" icon="{trIcon}" toolTip="Türkçe"/>
+			<mx:Button y="-27" right="5" width="20" click="changeLocale('en_US')" icon="{enIcon}" toolTip="English"/>
+			
+			<mx:Form width="100%" height="100%"><!-- defaultButton="{button}" -->
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'userName')}"> 
+					<s:TextInput id="userName" width="200"/>
+				</mx:FormItem>
+				
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'password')}">
+					<s:TextInput id="password" displayAsPassword="true" width="200"/>
+				</mx:FormItem>
+				
+				<mx:FormItem paddingLeft="63" paddingTop="10">
+					<s:Button id="button" width="64" label="{resourceManager.getString('messages', 'login')}" click="button_clickHandler(event)"/>
+				</mx:FormItem>
+			</mx:Form>		
+		</s:Panel>
+	</s:Group>
+	
+	<s:Group width="320" height="170" id="withoutstate">
+		<s:Panel
+			horizontalCenter="0"
+			verticalCenter="0"
+			id="loginPanel1" 
+			width="100%" 
+			height="100%" 
+			chromeColor="#E2E5E7"
+			title="{resourceManager.getString('messages', 'loginTitle')} : withoutstate " 
+			>
+			
+			<mx:Button y="-27" right="30" width="20" click="changeLocale('tr_TR')" icon="{trIcon}" toolTip="Türkçe"/>
+			<mx:Button y="-27" right="5" width="20" click="changeLocale('en_US')" icon="{enIcon}" toolTip="English"/>
+			
+			<mx:Form width="100%" height="100%"><!-- defaultButton="{button}" -->
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'userName')}"> 
+					<s:TextInput id="userName1" width="200"/>
+				</mx:FormItem>
+				
+				
+				<mx:FormItem label="{resourceManager.getString('messages', 'password')}">
+					<s:TextInput id="password1" displayAsPassword="true" width="200"/>
+				</mx:FormItem>
+				
+				<mx:FormItem paddingLeft="63" paddingTop="10">
+					<s:Button id="button1" width="64" height="30" label="{resourceManager.getString('messages', 'login')}" click="button_clickHandler(event)"/>
+				</mx:FormItem>
+			</mx:Form>		
+		</s:Panel>
+	</s:Group>
+	
+</s:Application>
