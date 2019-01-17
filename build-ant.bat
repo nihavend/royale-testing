@@ -3,7 +3,7 @@
 set ROYALE_HOME=D:\dev\royale-emulation-works\github\royale-asjs
 set COMPILER_PATH=D:\dev\royale-emulation-works\apache-royale-0.9.6-bin-js-swf\royale-asjs\js\bin
 rem set COMPILER_PATH=D:\dev\royale-emulation-works\github\royale-asjs\js\bin
-set GITREPO=..\royale-asjs\frameworks\projects
+set GITREPO=%ROYALE_HOME%\frameworks\projects
 
 set ROYALE_COMPILER_HOME=%COMPILER_PATH%
 
